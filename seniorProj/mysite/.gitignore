@@ -1,0 +1,5 @@
+#ignore certain yml file
+docker-compose2.dev.yml
+
+#ignore mac files
+.DS_store
