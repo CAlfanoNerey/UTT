@@ -5,5 +5,4 @@ docker-compose2.dev.yml
 .DS_store
 
 #ignore .idea folder
-.idea/workspace.xml 
-.idea/tasks.xml
+.idea
