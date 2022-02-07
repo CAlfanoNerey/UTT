@@ -11308,6 +11308,7 @@ body {
 }
 
 #layoutAuthentication {
+  background-color: rgba(3,102,71,255);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
