@@ -3047,7 +3047,7 @@ textarea.form-control-lg {
 .btn-primary {
   color: #fff;
   background-color: #0d6efd;
-  border-color: #0d6efd;
+  border-color: none;
 }
 .btn-primary:hover {
   color: #fff;
@@ -11308,6 +11308,7 @@ body {
 }
 
 #layoutAuthentication {
+  background-color: rgba(3,102,71,255);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
