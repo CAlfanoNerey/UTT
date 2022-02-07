@@ -3,3 +3,7 @@ docker-compose2.dev.yml
 
 #ignore mac files
 .DS_store
+
+#ignore .idea folder
+.idea/workspace.xml 
+.idea/tasks.xml
