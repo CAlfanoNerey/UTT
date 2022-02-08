@@ -56,7 +56,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-floating mb-3">
+                                            {% comment %} <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
                                             </div>
@@ -73,10 +73,10 @@
                                                         <label for="inputPasswordConfirm">Confirm Password</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> {% endcomment %}
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button type="submit"> Sign Up </button></div>
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html" style="background-color: rgba(3,102,71,255)">Create Account</a></div>
+                                                <div class="d-grid"><button type="submit" class="btn btn-primary btn-block" style="background-color: rgba(3,102,71,255)"> Sign Up </button></div>
+                                                {% comment %} <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html" style="background-color: rgba(3,102,71,255)">Create Account</a></div> {% endcomment %}
                                             </div>
                                         </form>
                                     </div>
