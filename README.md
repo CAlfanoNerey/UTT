@@ -1,4 +1,3 @@
-# UTT DEV INSTALL 
 
 
 docker install via dockerintall.sh file located in dev branch
