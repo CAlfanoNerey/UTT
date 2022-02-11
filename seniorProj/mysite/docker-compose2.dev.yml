@@ -19,6 +19,7 @@ services:
       - POSTGRES_PORT_5432_TCP_PORT=5432
     depends_on:
       - db
+    restart: on-failure
 
   db:
     image: postgres:alpine
