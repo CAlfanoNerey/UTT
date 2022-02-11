@@ -39,14 +39,20 @@
                                                         {{ form.password1 | as_crispy_field }}
                                                     </div>
                                                 </div>
+
                                                 {% for error in field.errors %}
                                                     <p style="color : red"> {{ error }} </p>
                                                 {% endfor %}
+                                             
 
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
-
+                                                    <div class="form-floating">
+                                                        {% comment %} <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" />
+                                                        <label for="inputLastName">Last name</label> {% endcomment %}
+                                                        {{ form.uID| as_crispy_field }}
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-floating">

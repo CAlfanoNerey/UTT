@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
+
+from .forms import SignUpForm
 from .models import courseCat
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
+
 # Create your views here.
 
 def indexView(request):
@@ -10,11 +16,12 @@ def indexView(request):
     return render(request, 'index.html', {'course':coursesView})
 
 def signUpView(request):
-    form = UserCreationForm(request.POST)
+    form = SignUpForm(request.POST)
     if form.is_valid():
         form.save()
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password1')
+        uID = form.cleaned_data.get('uID')
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')
