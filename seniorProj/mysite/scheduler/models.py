@@ -45,7 +45,7 @@ class User(AbstractUser):
 
 
 class StudChoice(models.Model):
-    crn = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    crn = models.ForeignKey(Classes, on_delete=models.CASCADE, related_name="crnLookOf")
     uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 # class Profile(models.Model):

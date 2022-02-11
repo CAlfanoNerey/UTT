@@ -23,12 +23,20 @@
 
 <body>
 
-    {% for i in item %}
+    {% comment %} {% for i in crn%}
     <br>
-      {{ i.crn }} 
-      <br>
-      {{ i.uID }}
+      {{ i }} 
+       
+      
+    {% endfor %} {% endcomment %}
+    {{ student.uID }}
+    {% for i in classes%}
+    <br>
+      CRN is: {{ i.crn }} Subj is:{{ i.subj }} 
+       
+      
     {% endfor %}
+
     <script>
       document.body.addEventListener('htmx:configRequest', (event) => {
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
