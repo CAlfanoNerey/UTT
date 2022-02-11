@@ -23,7 +23,7 @@ class courseCat(models.Model):
 
 
 class Classes(models.Model):
-    crn = models.IntegerField
+    crn = models.IntegerField()
     subj = models.CharField(max_length=50)
     courseNumb = models.IntegerField()
     title = models.CharField(max_length=200)
@@ -35,12 +35,18 @@ class Classes(models.Model):
     instructor = models.CharField(max_length=50)
     addInfo = models.TextField(max_length=500)
     def __str__(self):
-        return self.crn
+        return str(self.crn)
 
 
 class User(AbstractUser):
     uID = models.CharField(max_length=50)
+    def __str__(self):
+        return str(self.uID)
 
+
+class StudChoice(models.Model):
+    crn = models.ForeignKey(Classes, on_delete=models.CASCADE)
+    uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -64,6 +70,4 @@ class User(AbstractUser):
 #     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 
-# class StudChoice(models.Model):
-    # crn = models.ForeignKey(Classes, on_delete=models.CASCADE)
-    # uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
+

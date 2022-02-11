@@ -1,7 +1,8 @@
+from operator import itemgetter
 from django.shortcuts import render, redirect
 
 from .forms import SignUpForm
-from .models import courseCat
+from .models import courseCat, Classes, StudChoice
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -44,3 +45,8 @@ def loginView(request):
             ...
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form}, )
+
+def fkView(request):
+    current_user = request.user
+    item = StudChoice.objects.filter(id=current_user.id)
+    return render(request, 'addCourse.html', {'item': item})

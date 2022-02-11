@@ -23,7 +23,12 @@
 
 <body>
 
-    
+    {% for i in item %}
+    <br>
+      {{ i.crn }} 
+      <br>
+      {{ i.uID }}
+    {% endfor %}
     <script>
       document.body.addEventListener('htmx:configRequest', (event) => {
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
