@@ -51,8 +51,11 @@ def fkView(request):
     current_user = request.user
     student = User.objects.get(id=current_user.id) 
     # stuchoice = StudChoice.objects.filter(id=current_user.id)
-    crnChosen = StudChoice.objects.values_list('crn', flat=True)
-    classes = Classes.objects.filter(id__in=crnChosen)
+    # crnChosen = StudChoice.objects.values_list('crn', flat=True)
+    crnChosen = StudChoice.objects.all()
+    classes = crnChosen.filter(uID=current_user.id)
+    print(classes)
+    # classes = Classes.objects.filter(id__in=crnChosen)
     context= {
         # 'stuchoice': stuchoice,
         'classes' : classes,
