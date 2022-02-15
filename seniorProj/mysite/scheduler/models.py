@@ -24,8 +24,24 @@ class courseCat(models.Model):
 
 class Classes(models.Model):
     crn = models.IntegerField()
+    def __str__(self):
+        return str(self.crn)
+
+class Subject (models.Model):
+    crn = models.ForeignKey(Classes, on_delete=models.CASCADE)
     subj = models.CharField(max_length=50)
+    def __str__(self):
+        return str(self.subj)
+
+class CourseNumb (models.Model):
+    subj = models.ForeignKey(Subject, on_delete=models.CASCADE)
     courseNumb = models.IntegerField()
+    def __str__(self):
+        return str(self.courseNumb)
+
+class Section (models.Model):
+    courseNumb = models.ForeignKey(CourseNumb, on_delete=models.CASCADE)
+    section = models.IntegerField()
     title = models.CharField(max_length=200)
     max = models.IntegerField()
     seatsTaken = models.IntegerField(default=0)
@@ -35,8 +51,9 @@ class Classes(models.Model):
     instructor = models.CharField(max_length=50)
     addInfo = models.TextField(max_length=500)
     def __str__(self):
-        return str(self.crn)
+        return str(self.courseNumb)
 
+    
 
 class User(AbstractUser):
     uID = models.CharField(max_length=50)
@@ -45,7 +62,7 @@ class User(AbstractUser):
 
 
 class StudChoice(models.Model):
-    crn = models.ForeignKey(Classes, on_delete=models.CASCADE, related_name="crnLookOf")
+    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name="crnLookOf")
     uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 # class Profile(models.Model):
