@@ -23,20 +23,51 @@
 
 <body>
 
-    {% comment %} {% for i in crn%}
+
+
+
     <br>
-      {{ i }} 
-       
-      
-    {% endfor %} {% endcomment %}
+    <br>
     {{ student.uID }}
     {% for i in classes%}
     <br>
-      CRN is: {{ i.crn }} Subj is:{{ i.crn.subj }} 
-      
-      
+      CRN is: {{ i.section.courseNumb.subj.crn }} 
+      <br>
+      Subj is:{{ i.section.courseNumb.subj }} 
+      <br>
+      Course Number is : {{ i.section.courseNumb }} 
+      <br>
+      section is: {{ i.section }} 
+      <br>
+      <br>
     {% endfor %}
+    <br>
+    <br>
+ 
+ 
+<!-- HTMX linked fors -->
 
+    <select 
+    name="subj" 
+    hx-get= "{% url 'choose-numb' %}"  
+    hx-trigger="change"
+    hx-target="#courseNumb">
+      <option selected> Choose Subj</option>
+      {% for i in classes%}
+      <option value=" {{ i.section.courseNumb.subj.pk }} ">{{ i.section.courseNumb.subj }} {{ i.section.courseNumb.subj.pk }}</option>
+
+      {% endfor %}
+    </select>
+
+
+    <div id="courseNumb">
+      {% include 'partials/courseNumb.html' %}
+    </div>
+
+    
+
+
+    </select>
     <script>
       document.body.addEventListener('htmx:configRequest', (event) => {
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';

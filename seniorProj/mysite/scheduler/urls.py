@@ -9,4 +9,5 @@ urlpatterns = [
     path('login/', views.loginView, name='login'),
     path('logout/', LogoutView.as_view(), name="logout"),
     path('choice/', views.fkView, name='choice'),
+    path('htmx/numbForm', views.courseNumbDropdown, name='choose-numb')
 ]

@@ -2,8 +2,9 @@ from multiprocessing import context
 from operator import itemgetter
 from django.shortcuts import render, redirect
 
-from .forms import SignUpForm
-from .models import courseCat, Classes, StudChoice, User
+
+from .forms import SignUpForm, ChooseSubjForm, ChooseNumbForm
+from .models import CourseNumb, Subject, courseCat, Classes, StudChoice, User
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
@@ -50,16 +51,29 @@ def loginView(request):
 def fkView(request):
     current_user = request.user
     student = User.objects.get(id=current_user.id) 
-    # stuchoice = StudChoice.objects.filter(id=current_user.id)
-    # crnChosen = StudChoice.objects.values_list('crn', flat=True)
     crnChosen = StudChoice.objects.all()
     classes = crnChosen.filter(uID=current_user.id)
-    print(classes)
-    # classes = Classes.objects.filter(id__in=crnChosen)
+
+   
+    
     context= {
         # 'stuchoice': stuchoice,
         'classes' : classes,
         'crn': crnChosen,
-        'student' : student
+        'student' : student,
+
     }
+
+
     return render(request, 'addCourse.html', context)
+
+def courseNumbDropdown(request):
+    subj = request.GET.get('subj')
+    print("HERE " +subj)
+    form = CourseNumb.objects.filter(subj__id = subj)
+    print(form)
+    context = {
+        'form' : form
+    }
+    return render(request, "partials/courseNumb.html", context)
+
