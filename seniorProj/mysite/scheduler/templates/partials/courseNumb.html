@@ -1,10 +1,19 @@
 
-<select name="subj" >
+<select 
+name="section" 
+hx-get= "{% url 'course-display' %}"  
+hx-trigger="change"
+hx-target="#courseDisplay">
+    <option selected value='0'> Choose Course Number</option>
     {% for numb in form %}
-    hello
-    <option value='{{ numb }}'> {{ numb }}</option>
+    
+    <option value='{{ numb.pk }}'> {{ numb }}</option>
     
     {% endfor %}
     
 
 </select>
+
+<div id="courseDisplay">
+
+</div>

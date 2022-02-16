@@ -37,7 +37,7 @@ class CourseNumb (models.Model):
     subj = models.ForeignKey(Subject, on_delete=models.CASCADE)
     courseNumb = models.IntegerField()
     def __str__(self):
-        return str(self.courseNumb)
+        return str(str(self.subj) + " " +str(self.courseNumb))
 
 class Section (models.Model):
     courseNumb = models.ForeignKey(CourseNumb, on_delete=models.CASCADE)

@@ -1,0 +1,24 @@
+
+
+{% for section in form %}
+
+<p>Section Num: {{ section.section }}</p>
+<p>Class Title: {{ section.title }}</p>
+
+<p>Max Seats: {{ section.max }}</p>
+
+<p>Seats Taken:{{ section.seatsTaken }} </p>
+
+<p>Day(s): {{ section.days }}</p>
+
+<p>Time: {{ section.time }}</p>
+
+<p>Duration: {{ section.duration }}</p>
+
+<p>Instructor: {{ section.instructor }}</p>
+
+<p>Additional Info: {{ section.addInfo}}</p>
+<br>
+{% endfor %}
+    
+
