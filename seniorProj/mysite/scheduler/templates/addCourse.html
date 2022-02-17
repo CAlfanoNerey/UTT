@@ -68,7 +68,7 @@
       hx-target="#courseNumb">
         <option selected value="0"> Choose Subj</option>
         {% for i in courseList %}
-        <option value=" {{ i.crn.pk }} ">{{ i.subj }} {{ i.crn.pk }}</option>
+        <option value=" {{ i.crn.pk }} " name="flag">{{ i.subj }} {{ i.crn.pk }}</option>
   
         {% endfor %}
       </select>
@@ -90,6 +90,8 @@
         event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
       })
     </script>
+    
+    
 </body>
 
 </html>

@@ -18,7 +18,16 @@
 <p>Instructor: {{ section.instructor }}</p>
 
 <p>Additional Info: {{ section.addInfo}}</p>
+
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="courseNumb" value="{{section.courseNumb}}">
+    Select: <input type="checkbox" name="flag" value='{{ section.section }}'> {{section}}
+    <button type="submit">submit</button>
+</form>
 <br>
 {% endfor %}
-    
+
+
 

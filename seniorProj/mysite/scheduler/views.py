@@ -4,7 +4,7 @@ from operator import itemgetter
 from django.shortcuts import render, redirect
 
 
-from .forms import SignUpForm, ChooseSubjForm, ChooseNumbForm
+from .forms import SignUpForm, ChooseSubjForm, ChooseNumbForm, StudChoiceForm
 from .models import CourseNumb, Subject, courseCat, Classes, StudChoice, User, Section
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -56,16 +56,27 @@ def fkView(request):
     crnChosen = StudChoice.objects.all()
     classes = crnChosen.filter(uID=current_user.id)
 
+
+    if request.method == "POST":
+        courseNumber = request.POST['courseNumb']
+        classname= request.POST['flag']
+        courseChoice = CourseNumb.objects.get(courseNumb=courseNumber)
+        sectionChoice = Section.objects.get(courseNumb=courseChoice, section = classname)
+        
+        ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
+        
+ 
     # Loads all available courses
     courseList = Subject.objects.all().distinct()
-    
-    
+      
+
     context= {
         # 'stuchoice': stuchoice,
         'classes' : classes,
         # 'crn': crnChosen,
         'student' : student,
-        'courseList':courseList
+        'courseList':courseList,
+  
 
     }
 
@@ -85,7 +96,9 @@ def courseDisplay(request):
     section = request.GET.get('section')
     # print(section)
     form = Section.objects.filter(courseNumb__id = section)
+
     context = {
-        'form' : form
+        'form' : form,
+
     }
     return render(request, 'partials/courseDisplay.html', context)
