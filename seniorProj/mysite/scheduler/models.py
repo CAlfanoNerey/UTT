@@ -9,38 +9,14 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
 
 
-class courseCat(models.Model):
-    classtitle = models.CharField(max_length=200)
-    classTime = models.CharField(max_length=200)
-    def __str__(self):
-        return self.classtitle
-# Create your models here.
-
-# class CRN(model.Model):
-#     crn = models.IntegerField()
-#     def __str__(self):
-#         return self.crn
 
 
-class Classes(models.Model):
+
+
+class fullClass (models.Model):
     crn = models.IntegerField()
-    def __str__(self):
-        return str(self.crn)
-
-class Subject (models.Model):
-    crn = models.ForeignKey(Classes, on_delete=models.CASCADE)
     subj = models.CharField(max_length=50)
-    def __str__(self):
-        return str(self.subj)
-
-class CourseNumb (models.Model):
-    subj = models.ForeignKey(Subject, on_delete=models.CASCADE)
     courseNumb = models.IntegerField()
-    def __str__(self):
-        return str(str(self.courseNumb))
-
-class Section (models.Model):
-    courseNumb = models.ForeignKey(CourseNumb, on_delete=models.CASCADE)
     section = models.IntegerField()
     title = models.CharField(max_length=200)
     max = models.IntegerField()
@@ -51,7 +27,7 @@ class Section (models.Model):
     instructor = models.CharField(max_length=50)
     addInfo = models.TextField(max_length=500)
     def __str__(self):
-        return str(self.courseNumb)
+        return str(self.crn)
 
     
 
@@ -62,7 +38,7 @@ class User(AbstractUser):
 
 
 class StudChoice(models.Model):
-    section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name="crnLookOf")
+    section = models.ForeignKey(fullClass, on_delete=models.CASCADE, related_name="crnLookOf")
     uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 # class Profile(models.Model):

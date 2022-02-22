@@ -4,20 +4,19 @@ from operator import itemgetter
 from django.shortcuts import render, redirect
 
 
-from .forms import SignUpForm, ChooseSubjForm, ChooseNumbForm, StudChoiceForm
-from .models import CourseNumb, Subject, courseCat, Classes, StudChoice, User, Section
+from .forms import SignUpForm
+from .models import  StudChoice, User, fullClass
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
 
-# Create your views here.
 
 def indexView(request):
-    coursesView = courseCat.objects.all()
+    context={
 
-    return render(request, 'index.html', {'course':coursesView})
+    }
+
+    return render(request, 'index.html', {'course':context})
 
 def signUpView(request):
     form = SignUpForm(request.POST)
@@ -58,26 +57,19 @@ def fkView(request):
 
 
     if request.method == "POST":
-        courseNumber = request.POST['courseNumb']
-        classname= request.POST['flag']
-        courseChoice = CourseNumb.objects.get(courseNumb=courseNumber)
-        sectionChoice = Section.objects.get(courseNumb=courseChoice, section = classname)
-        
+        crn= request.POST['flag']
+        sectionChoice = fullClass.objects.get(crn = crn)
         ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
         
  
     # Loads all available courses
-    courseList = Subject.objects.all().distinct()
+    courses = fullClass.objects.order_by().values('subj').distinct()
       
 
     context= {
-        # 'stuchoice': stuchoice,
         'classes' : classes,
-        # 'crn': crnChosen,
         'student' : student,
-        'courseList':courseList,
-  
-
+        'courseList':courses
     }
 
 
@@ -85,17 +77,16 @@ def fkView(request):
 
 def courseNumbDropdown(request):
     subj = request.GET.get('subj')
-    form = CourseNumb.objects.filter(subj__id = subj)
-    
+    form = fullClass.objects.filter(subj = subj)
     context = {
         'form' : form
     }
     return render(request, "partials/courseNumb.html", context)
 
 def courseDisplay(request):
-    section = request.GET.get('section')
-    # print(section)
-    form = Section.objects.filter(courseNumb__id = section)
+    coursenum = request.GET.get('section')
+    print(coursenum)
+    form = fullClass.objects.filter(courseNumb = coursenum)
 
     context = {
         'form' : form,

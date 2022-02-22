@@ -31,13 +31,13 @@
     {{ student.uID }}
     {% for i in classes%}
     <br>
-      CRN is: {{ i.section.courseNumb.subj.crn }} 
+      CRN is: {{ i.section.crn }} 
       <br>
-      Subj is:{{ i.section.courseNumb.subj }} 
+      Subj is:{{ i.section.subj }} 
       <br>
       Course Number is : {{ i.section.courseNumb }} 
       <br>
-      section is: {{ i.section }} 
+      section is: {{ i.section.section }} 
       <br>
       <br>
     {% endfor %}
@@ -68,7 +68,7 @@
       hx-target="#courseNumb">
         <option selected value="0"> Choose Subj</option>
         {% for i in courseList %}
-        <option value=" {{ i.crn.pk }} " name="flag">{{ i.subj }} {{ i.crn.pk }}</option>
+        <option value="{{ i.subj }}" name="flag">{{ i.subj }} {{ i.crn.pk }}</option>
   
         {% endfor %}
       </select>

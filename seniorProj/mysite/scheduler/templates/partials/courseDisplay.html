@@ -23,7 +23,7 @@
 <form method="post">
     {% csrf_token %}
     <input type="hidden" name="courseNumb" value="{{section.courseNumb}}">
-    Select: <input type="checkbox" name="flag" value='{{ section.section }}'> {{section}}
+    Select: <input type="checkbox" name="flag" value='{{ section.crn }}'> {{section.crn}}
     <button type="submit">submit</button>
 </form>
 <br>

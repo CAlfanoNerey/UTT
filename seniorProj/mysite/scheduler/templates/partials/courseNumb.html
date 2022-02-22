@@ -7,7 +7,7 @@ hx-target="#courseDisplay">
     <option selected value='0'> Choose Course Number</option>
     {% for numb in form %}
     
-    <option value='{{ numb.pk }}'> {{ numb }}</option>
+    <option value='{{numb.courseNumb}}'> {{ numb.courseNumb }}</option>
     
     {% endfor %}
     
