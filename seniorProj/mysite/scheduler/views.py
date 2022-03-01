@@ -25,6 +25,7 @@ def signUpView(request):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password1')
         uID = form.cleaned_data.get('uID')
+        email = form.cleaned_data.get('email')
         user = authenticate(username=username, password=password)
         login(request, user)
         return redirect('home')

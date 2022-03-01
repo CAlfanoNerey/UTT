@@ -9,10 +9,6 @@ from django.dispatch import receiver
 from django.contrib.auth.models import AbstractUser
 
 
-
-
-
-
 class fullClass (models.Model):
     crn = models.IntegerField()
     subj = models.CharField(max_length=50)
@@ -29,7 +25,7 @@ class fullClass (models.Model):
     def __str__(self):
         return str(self.crn)
 
-    
+
 
 class User(AbstractUser):
     uID = models.CharField(max_length=50)

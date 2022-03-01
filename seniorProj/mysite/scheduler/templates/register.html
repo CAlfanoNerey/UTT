@@ -61,6 +61,13 @@
                                                         {{ form.password2 | as_crispy_field }}
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        {% comment %} <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                        <label for="inputEmail">Email address</label> {% endcomment %}
+                                                        {{ form.email | as_crispy_field }}
+                                                    </div>
+                                                </div>
                                             </div>
                                             {% comment %} <div class="form-floating mb-3">
                                                 <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
