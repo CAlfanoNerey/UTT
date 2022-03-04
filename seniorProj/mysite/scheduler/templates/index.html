@@ -13,9 +13,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-primary">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.html">Torro Tracker</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -84,7 +84,7 @@
                                     </a>
                                     <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
-                                            <a class="nav-link" href="{401.html">401 Page</a>
+                                            <a class="nav-link" href="401.html">401 Page</a>
                                             <a class="nav-link" href="404.html">404 Page</a>
                                             <a class="nav-link" href="500.html">500 Page</a>
                                         </nav>
@@ -111,83 +111,34 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Torro Tracker</h1>
+                        <h1 class="mt-4">Dashboard</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
+
                         <div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-primary text-white mb-4">
-                                    <div class="card-body">Primary Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-warning text-white mb-4">
-                                    <div class="card-body">Warning Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Danger Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
-                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                        Area Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6">
-                                <div class="card mb-4">
-                                    <div class="card-header">
-                                        <i class="fas fa-chart-bar me-1"></i>
-                                        Bar Chart Example
-                                    </div>
-                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
-                                </div>
-                            </div>
-                        </div>
+
+
+
+                            <div class="col-xl-8 col-lg-6 col-md-4">
+
+
+
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                DataTable Example
+                                Course Search
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Course Title</th>
+                                            <th>Subject</th>
+                                            <th>Instructor</th>
+                                            <th>Max Students</th>
+                                            <th>Course Prefix</th>
+                                            <th>CRN</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -202,20 +153,20 @@
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
+                                            <td>Adv Db</td>
+                                            <td>COP</td>
+                                            <td>Ventura</td>
+                                            <td>60</td>
+                                            <td>3515</td>
+                                            <td>123456</td>
                                         </tr>
                                         <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
+                                            <td>Hands on Cyber</td>
+                                            <td>COP</td>
+                                            <td>Fang</td>
+                                            <td>60</td>
+                                            <td>2840</td>
+                                            <td>654321</td>
                                         </tr>
                                         <tr>
                                             <td>Ashton Cox</td>
@@ -658,6 +609,63 @@
                                             <td>$112,000</td>
                                         </tr>
                                     </tbody>
+                                    <tfoot><a class="btn btn-primary" href="index.html" style="background-color: rgba(3,102,71,255)" id="addCourse">Add Course</a></tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xl-3 col-lg-5 col-md-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Added Courses
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="col-xl-8 col-lg-6 col-md-4">
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Search by Subject
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+
+                                    </tbody>
+                                    <tfoot>
+                                      <label for="subject">Subject:</label>
+
+<select id="subject">
+  <option value="CGS">CGS</option>
+  <option value="COP">COP</option>
+  <option value="MAD">MAD</option>
+  <option value="ENG">ENG</option>
+</select>
+
+<label for="course">Course:</label>
+
+<select id="course">
+  <option value="volvo">1540</option>
+  <option value="saab">1320</option>
+  <option value="opel">2319</option>
+  <option value="audi">4201</option>
+</select>
+
+
+                                      <a class="btn btn-primary" href="index.html" style="background-color: rgba(3,102,71,255)" id="addCourse">Add Course</a></tfoot>
                                 </table>
                             </div>
                         </div>
@@ -666,7 +674,7 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div class="text-muted">Copyright &copy; USF Torro Tracker 2022</div>
                             <div>
                                 <a href="#">Privacy Policy</a>
                                 &middot;
