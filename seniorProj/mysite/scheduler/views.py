@@ -1,6 +1,7 @@
 from enum import unique
 from multiprocessing import context
 from operator import itemgetter
+from secrets import choice
 from django.shortcuts import render, redirect
 
 
@@ -58,11 +59,21 @@ def fkView(request):
 
 
     if request.method == "POST":
-        crn= request.POST['flag']
-        sectionChoice = fullClass.objects.get(crn = crn)
-        ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
+
+        if 'flag' in request.POST:
+            crn= request.POST['flag']
+            sectionChoice = fullClass.objects.get(crn = crn)
+            ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
         
- 
+        if 'crnAdded' in request.POST:
+            delChoice = request.POST['crnAdded']
+            delChoiceObj = fullClass.objects.get(crn = delChoice)
+
+            print(str(delChoice) + " " + str(student.uID))
+            # print(str(StudChoice.objects.get(section = delChoiceObj, uID = request.user)))
+            delObj = StudChoice.objects.filter(section = delChoiceObj, uID = request.user).delete()
+            
+
     # Loads all available courses
     courses = fullClass.objects.order_by().values('subj').distinct()
       
