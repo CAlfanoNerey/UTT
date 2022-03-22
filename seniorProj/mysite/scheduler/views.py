@@ -59,29 +59,39 @@ def fkView(request):
 
 
     if request.method == "POST":
+        if 'selectMult' in request.POST:
+            crn= request.POST.getlist('selectMult')
+            for x in crn:
+                sectionChoice = fullClass.objects.get(crn = x)
+                ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
 
+        
         if 'flag' in request.POST:
             crn= request.POST['flag']
             sectionChoice = fullClass.objects.get(crn = crn)
             ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
         
         if 'crnAdded' in request.POST:
-            delChoice = request.POST['crnAdded']
-            delChoiceObj = fullClass.objects.get(crn = delChoice)
-
-            print(str(delChoice) + " " + str(student.uID))
+            delChoice = request.POST.getlist('crnAdded')
+            for x in delChoice:
+                delChoiceObj = fullClass.objects.get(crn = x)
+                print(str(delChoice) + " " + str(student.uID))
             # print(str(StudChoice.objects.get(section = delChoiceObj, uID = request.user)))
-            delObj = StudChoice.objects.filter(section = delChoiceObj, uID = request.user).delete()
+                delObj = StudChoice.objects.filter(section = delChoiceObj, uID = request.user).delete()
             
 
-    # Loads all available courses
+    # Loads all available courses distinct
     courses = fullClass.objects.order_by().values('subj').distinct()
-      
+    
+    #loads all available courses not distinct
+    fullList = fullClass.objects.all()
+
 
     context= {
         'classes' : classes,
         'student' : student,
-        'courseList':courses
+        'courseList':courses,
+        'fullList': fullList
     }
 
 
