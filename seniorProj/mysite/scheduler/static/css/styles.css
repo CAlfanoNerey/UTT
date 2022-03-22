@@ -79,6 +79,81 @@
   }
 }
 
+#textStuff {
+  background-color: #006747;
+  opacity: 0.9;
+}
+
+
+#logoNstuff {
+  text-align: center;
+  color: white;
+  font-family: var(--bs-body-font-family);
+  margin-top: 10px;
+}
+
+#logoNstuff h1 {
+  text-shadow: 0 0 3px #006747, 0 0 5px white;
+}
+
+#logoNstuff p {
+  margin: 5%;
+  color: white;
+  opacity: 1;
+}
+
+#logoNstuff img {
+  margin-bottom: 10px;
+  border-radius: 50%;
+  width: 25%;
+  height: auto;
+}
+
+
+#weekGlance table {
+  border: 1px solid black;
+/*   table-layout: fixed; */
+  width: 100%;
+  font-family: sans-serif;
+
+}
+
+#weekGlance td {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.course1 {
+  background-color: green;
+}
+
+.course2 {
+  background-color: blue;
+}
+
+.course3 {
+  background-color: red;
+}
+
+.course4 {
+  background-color: orange;
+}
+
+.course5 {
+  background-color: yellow;
+}
+
+.course6 {
+  background-color: purple;
+}
+
+.scheduledBreak {
+  background-color: magenta;
+}
+
+.scheduleConflict {
+  background-color: black;
+}
 
 body {
   margin: 0;
@@ -11323,7 +11398,7 @@ body {
 }
 
 #layoutAuthentication {
-  background-color: rgba(3,102,71,255);
+//  background-color: rgba(3,102,71,255);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
