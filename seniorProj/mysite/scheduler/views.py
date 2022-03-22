@@ -13,11 +13,27 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 def indexView(request):
-    context={
+    if request.user.is_authenticated:
+        return redirect('choice')
+    else:    
+        if request.method == "POST":
 
-    }
+            context = {}
+            form = AuthenticationForm(None, request.POST)
+            context['form'] = form
+            if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('home')
+        else:
+            if request.user.is_authenticated:
+                return redirect('home')
+            else:
+                ...
+            form = AuthenticationForm()
+        return render(request, 'login.html', {'form': form}, )
 
-    return render(request, 'index.html', {'course':context})
+
 
 def signUpView(request):
     form = SignUpForm(request.POST)
