@@ -9,7 +9,7 @@ from .forms import SignUpForm
 from .models import  StudChoice, User, fullClass
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+import itertools
 
 
 def indexView(request):
@@ -109,6 +109,30 @@ def fkView(request):
         'courseList':courses,
         'fullList': fullList
     }
+
+    #Algorithm
+    classlist= []
+    listtoappend = []
+
+    #gets the distinct crns
+    # classfilter = classes.distinct('section')
+
+    # for x in classfilter:
+    #     print(str(x.section.subj))
+
+    for x in classes:
+        # print(x.section)
+        
+        # listtoappend.append(str(x.section.subj) + str(x.section.courseNumb))
+        classfilter = fullClass.objects.filter(subj=x.section.subj, section=x.section.courseNumb)
+        listtoappend.append(str(classfilter))
+        # print(str(fullClass.objects.filter(subj='COP', section=3515)))
+        classlist.append(listtoappend)
+        listtoappend = []
+
+    print(classlist)
+    for element in itertools.product(*classlist):
+        print(element)
 
 
     return render(request, 'addCourse.html', context)
