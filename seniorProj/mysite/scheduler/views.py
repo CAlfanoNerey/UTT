@@ -79,7 +79,8 @@ def fkView(request):
             crn= request.POST.getlist('selectMult')
             for x in crn:
                 sectionChoice = fullClass.objects.get(crn = x)
-                ret = StudChoice.objects.create(section=sectionChoice, uID=request.user )
+                courseNumbSubj = (str(sectionChoice.subj) + " " + str(sectionChoice.courseNumb))
+                ret = StudChoice.objects.create(section=sectionChoice,courseSubjNum=courseNumbSubj, uID=request.user )
 
         
         if 'flag' in request.POST:
@@ -111,28 +112,41 @@ def fkView(request):
     }
 
     #Algorithm
-    classlist= []
-    listtoappend = []
 
-    #gets the distinct crns
-    # classfilter = classes.distinct('section')
+    coursenumDict = {}
+    crnlist = []
+    dist = classes.order_by().values('courseSubjNum').distinct()
+    print("distinct" + str(dist))
 
-    # for x in classfilter:
-    #     print(str(x.section.subj))
 
-    for x in classes:
-        # print(x.section)
+
+    for courseandnum in dist:
+        courseval= courseandnum.get('courseSubjNum')
+        split = courseval.split(' ')
+        # print("subj " + str(subj[0]) + " numb " + str(subj[1]))
+        subject = split[0]
+        classnum = int(split[1]) 
+        # print("subj " + subj + " numb " + classnum)
+        classfilter = fullClass.objects.filter(subj=subject, courseNumb=classnum)
+        coursenumDict[courseval]= None
+     
+        for y in classfilter:
+            crnlist.append(y.crn)
         
-        # listtoappend.append(str(x.section.subj) + str(x.section.courseNumb))
-        classfilter = fullClass.objects.filter(subj=x.section.subj, section=x.section.courseNumb)
-        listtoappend.append(str(classfilter))
-        # print(str(fullClass.objects.filter(subj='COP', section=3515)))
-        classlist.append(listtoappend)
-        listtoappend = []
+        coursenumDict[courseval]=crnlist
+        crnlist = []
+        # print(str(classfilter.crn))
+        # print(x.get('courseSubjNum'))
 
-    print(classlist)
-    for element in itertools.product(*classlist):
-        print(element)
+    print(coursenumDict)
+
+    # print("******ClassLIst******")
+    # print(classlist)
+    #cartesian product of dictionaries
+    keys = coursenumDict.keys()
+    values = coursenumDict.values()
+    for instance in itertools.product(*values):
+        print(dict(zip(keys, instance)))
 
 
     return render(request, 'addCourse.html', context)

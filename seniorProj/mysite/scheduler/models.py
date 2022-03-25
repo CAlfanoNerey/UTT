@@ -37,6 +37,7 @@ class User(AbstractUser):
 
 class StudChoice(models.Model):
     section = models.ForeignKey(fullClass, on_delete=models.CASCADE, related_name="crnLookOf")
+    courseSubjNum = models.CharField(max_length=50)
     uID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 # class Profile(models.Model):
