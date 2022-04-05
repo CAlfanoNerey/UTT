@@ -9,7 +9,8 @@ from .forms import SignUpForm
 from .models import  StudChoice, User, fullClass
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-import itertools
+import itertools 
+from itertools import chain
 
 
 def indexView(request):
@@ -95,7 +96,104 @@ def fkView(request):
                 print(str(delChoice) + " " + str(student.uID))
             # print(str(StudChoice.objects.get(section = delChoiceObj, uID = request.user)))
                 delObj = StudChoice.objects.filter(section = delChoiceObj, uID = request.user).delete()
+        if 'gensched' in request.POST:
+             #Algorithm
+
+            coursenumDict = {}
+            crnlist = []
+            dist = classes.order_by().values('courseSubjNum').distinct()
+            print("distinct" + str(dist))
+
+
+
+            for courseandnum in dist:
+                courseval= courseandnum.get('courseSubjNum')
+                split = courseval.split(' ')
+                # print("subj " + str(subj[0]) + " numb " + str(subj[1]))
+                subject = split[0]
+                classnum = int(split[1]) 
+                # print("subj " + subj + " numb " + classnum)
+                classfilter = fullClass.objects.filter(subj=subject, courseNumb=classnum)
+                coursenumDict[courseval]= None
             
+                for y in classfilter:
+                    crnlist.append(y.crn)
+                
+                coursenumDict[courseval]=crnlist
+                crnlist = []
+                # print(str(classfilter.crn))
+                # print(x.get('courseSubjNum'))
+
+            print(coursenumDict)
+
+            # print("******ClassLIst******")
+            # print(classlist)
+            #cartesian product of dictionaries
+            keys = coursenumDict.keys()
+            values = coursenumDict.values()
+
+            daydict = {}
+            conflictdays = {}
+            noconflict={}
+            finalschedule={}
+            schedulecount = 0
+            for instance in itertools.product(*values):
+                # Instance = Cartesian product ^^
+                print(dict(zip(keys, instance)))
+                print(instance)
+                for crn in instance:
+                    currclass = fullClass.objects.get(crn= crn)
+                    daydict[currclass.crn] = currclass.days + str(currclass.time) + " "+ str(currclass.duration)
+                print("daydict "+str(daydict))
+                
+                # merges if conflict
+                for key, value in daydict.items():
+                    if value not in conflictdays:
+                        conflictdays[value] = [key]
+                    else:
+                        conflictdays[value].append(key)
+
+                for key in conflictdays:
+                    value = conflictdays[key]
+                    #if more conflict in key
+                   
+                    if (len(value) > 1):
+                        
+                        noconflict[str(value)] = 'conflict' 
+                    else:
+                        noconflict[str(value)] =key
+
+                for key in noconflict:
+                    value = noconflict[key]
+                    if noconflict[key] == "conflict" :
+                        noconflict.clear()
+                        break
+
+                finalschedule[schedulecount] = []
+                for key in noconflict:
+                    #get data and clean it
+                    key = str(key)
+                    key = key.replace("'","")
+                    key = key.replace("[","")
+                    key = key.replace("]","")
+                    value = key
+                    
+                    #append to the final schedule with no conflicts
+                    finalschedule[schedulecount].append(value)
+
+                schedulecount += 1
+
+                print("THIS IS IT" + str(noconflict))
+                print("final schedule no conflict " + str(finalschedule))
+                print()
+                
+                daydict.clear()
+                conflictdays.clear()
+                noconflict.clear()
+                
+                
+            
+        
 
     # Loads all available courses distinct
     courses = fullClass.objects.order_by().values('subj').distinct()
@@ -111,42 +209,7 @@ def fkView(request):
         'fullList': fullList
     }
 
-    #Algorithm
-
-    coursenumDict = {}
-    crnlist = []
-    dist = classes.order_by().values('courseSubjNum').distinct()
-    print("distinct" + str(dist))
-
-
-
-    for courseandnum in dist:
-        courseval= courseandnum.get('courseSubjNum')
-        split = courseval.split(' ')
-        # print("subj " + str(subj[0]) + " numb " + str(subj[1]))
-        subject = split[0]
-        classnum = int(split[1]) 
-        # print("subj " + subj + " numb " + classnum)
-        classfilter = fullClass.objects.filter(subj=subject, courseNumb=classnum)
-        coursenumDict[courseval]= None
-     
-        for y in classfilter:
-            crnlist.append(y.crn)
-        
-        coursenumDict[courseval]=crnlist
-        crnlist = []
-        # print(str(classfilter.crn))
-        # print(x.get('courseSubjNum'))
-
-    print(coursenumDict)
-
-    # print("******ClassLIst******")
-    # print(classlist)
-    #cartesian product of dictionaries
-    keys = coursenumDict.keys()
-    values = coursenumDict.values()
-    for instance in itertools.product(*values):
-        print(dict(zip(keys, instance)))
+         
 
 
     return render(request, 'addCourse.html', context)
